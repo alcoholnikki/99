@@ -9,7 +9,8 @@ def scihub_download(
         paper_type: str = 'doi',
         scihub_url: str = None,
         out: str = None,
-        proxies: dict = None
+        proxies: dict = None,
+        timeout: int = None,
     ) -> None:
     """Download a paper from SciHub.
 
@@ -33,6 +34,7 @@ def scihub_download(
         source_type=paper_type,
         scihub_url=scihub_url,
         out=out,
-        proxies=proxies
+        proxies=proxies,
+        timeout=timeout
     ).run()
 
