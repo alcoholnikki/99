@@ -28,7 +28,8 @@ class ScihubTask(BaseTask):
                  scihub_url: str = None,
                  scihub_url_chooser_cls=default_chooser_cls,
                  out: str = None,
-                 proxies: dict = None):
+                 proxies: dict = None,
+                 timeout: int = None):
         super().__init__()
         self.source_keyword = source_keyword
         self.scihub_url_chooser_cls = scihub_url_chooser_cls
@@ -37,8 +38,10 @@ class ScihubTask(BaseTask):
         self.source_class = source_classes.get(source_type, DoiSource)
         self.out = out
         self.proxies = proxies or {}
+        self.timeout = timeout
         self.context['status'] = 'initialized'
         self.context['proxies'] = self.proxies
+        self.context['timeout'] = timeout
         self.service = ScihubUrlService()
         self.updater = CrawlingScihubDomainUpdater()
 

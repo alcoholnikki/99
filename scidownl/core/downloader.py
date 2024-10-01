@@ -31,7 +31,8 @@ class UrlDownloader(BaseDownloader, BaseTaskStep):
         try:
             url = self.information.get_url()
             proxies = self.task.context.get('proxies', {}) if self.task is not None else {}
-            res = requests.get(url, stream=True, proxies=proxies)
+            timeout = self.task.context.get('timeout', None) if self.task is not None else None
+            res = requests.get(url, stream=True, proxies=proxies, timeout=timeout)
             total_length = res.headers.get('content-length')
 
             with open(out, "wb") as f:
